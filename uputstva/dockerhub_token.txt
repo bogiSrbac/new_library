@@ -1,0 +1,14 @@
+in profile
+security
+in githube repo for project
+-settings
+-secrets
+-dependaboat
+FIRST CREATE FOR USER
+-new dependaboat
+-in value type your dockerhub account username
+CREATE FOR TOKEN
+-new dependaboat
+-in value copy your created token from dockerhub
+
+dckr_pat__aNPF_bbpImQDoLv-SW1P2fheOM

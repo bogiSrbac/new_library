@@ -1,0 +1,2 @@
+- install drf spectacular tool
+https://drf-spectacular.readthedocs.io/en/latest/readme.html#

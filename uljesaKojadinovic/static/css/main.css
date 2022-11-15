@@ -1,0 +1,21 @@
+.home-conteiner{
+    display: none;
+    animation: fadeOut 1.5s linear;
+}
+
+.home-conteiner.appear{
+    display: block;
+    color:blue;
+    animation: fadeIn 1.5s linear;
+}
+@keyframes fadeOut {
+    0%{opacity: 1}
+    50%{opacity: 0.5}
+    100%{opacity: 0}
+}
+
+@keyframes fadeIn {
+    0%{opacity: 0}
+    50%{opacity: 0.5}
+    100%{opacity: 1}
+}

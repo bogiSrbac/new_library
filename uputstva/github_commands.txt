@@ -1,0 +1,20 @@
+create new repo in github (choose python for gitignore)
+copy link
+in win powershell in folder
+- git clone link-from-github-repo
+
+GITHUB ACTIONS (linked to textfile dockerhub token)
+*in root of project create new folder
+.github
+*inside that folder create new 
+workflows
+*inside that create new yml file
+checks.yml
+
+github token for authentication
+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
+git remote set-url origin https://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@github.com/bogiSrbac/my-recipe-app-api.git
+
+git add .
+git commit -am 'what-commit-name'
+git push origin

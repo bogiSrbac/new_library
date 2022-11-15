@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    {#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>#}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+          integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"/>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css"/>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_page.css' %}">
+</head>
+<body>
+{#modal#}
+<div class="modal fade" id="libraryModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {#  creating from js scripts with imports  #}
+            </div>
+            {#            <div class="modal-footer">#}
+            {#                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>#}
+            {#                <button type="button" class="btn btn-primary">Send message</button>#}
+            {#            </div>#}
+        </div>
+    </div>
+</div>
+{#end of modal#}
+{#navbar#}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">LIBRARY</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Registration</a>
+                </li>
+
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</nav>
+
+
+{#end of navbar#}
+{#main container#}
+{#container home page#}
+<div class="container mt-3">
+    <div class="home-conteiner appear">
+        <div class="home-box">
+            <div class="box-1">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Authors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Books</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Disabled</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-2">
+            </div>
+        </div>
+    </div>
+    {#end of home page#}
+
+
+    <div class="home-conteiner">
+        <p>Ovde sam 2</p>
+    </div>
+    <div class="home-conteiner">
+        <p>Ovde sam 3</p>
+    </div>
+    <div class="home-conteiner">
+        <p>LogIn</p>
+    </div>
+    <div class="home-conteiner">
+        <p>Registration</p>
+    </div>
+
+
+    {#    users and borrowers    #}
+    <div class="home-conteiner">
+        <div class="row g-3">
+            <form class="row g-3 col-md-6 border border-primary rounded me-3">
+                <p class="h4 primary rounded" style="background-color: cadetblue">Find user</p>
+                {#   alert part     #}
+                <div id="liveAlertPlaceholder">
+                </div>
+                {#   end of alert     #}
+                <div class="col-md-3">
+                    <label for="inputLetter" class="form-label">Choose letter</label>
+                    <select id="inputLetter" class="form-select">
+                    </select>
+                </div>
+                <div class="col-md-9">
+                    <div class="pe-2">
+                        <label for="chooseUser" class="form-label">Choose user</label>
+                        <select id="chooseUser" class="form-select" disabled>
+                            <option selected>Choose...</option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-12" id="disable-letter-field">
+                    <label for="mySelect2" class="form-label">Or type last name</label>
+                    <select class="form-select js-data-example-ajax" id="mySelect2"></select>
+
+                </div>
+
+                <div class="col-9 mb-2">
+                    <button type="button" class="btn btn-primary" id="setBorrower" disabled>Set borrower</button>
+                </div>
+            </form>
+
+            {#    form to borrow book        #}
+            <form class="row g-3 col-md-6 border border-primary rounded">
+                {#   hidden user id  #}
+                <p id="userBorrowerId" style="display: none"></p>
+
+                <p class="h4 primary rounded" style="background-color: cadetblue">Borrow book</p>
+
+                <div class="col-md-12">
+                    <label for="borrowerName" class="form-label">User name</label>
+                    <input type="text" name="borrowerName" class="form-control" id="borrowerName" disabled>
+                </div>
+                <div class="col-md-12">
+                    <label for="findBook" class="form-label">Search</label>
+                    <select class="form-select js-data-example-ajax" id="findBook"></select>
+                    <div id="emailHelp" class="form-text">Type name of book or author</div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="pe-2">
+                        <label for="chooseBook" class="form-label">Choose book</label>
+                        <select id="chooseBook" class="form-select" disabled>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-9">
+                    <div class="pe-2">
+                        <label for="choosenBook" class="form-label">Choosen book</label>
+                        <input type="text" class="form-control" id="choosenBook" disabled>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="pe-2">
+                        <label for="bookQuantity" class="form-label">In stock</label>
+                        <input type="text" class="form-control" id="bookQuantity" disabled>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="pe-2">
+                        <label for="lendDate" class="form-label">Lend date</label>
+                        <input type="date" class="form-control" id="lendDate" pattern="\d{1,2}/\d{1,2}/\d{4}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="pe-2">
+                        <label for="returnDate" class="form-label">Return date</label>
+                        <input type="date" class="form-control" id="returnDate" value="" disabled>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="pe-2">
+                        <label for="duration" class="form-label">Duration</label>
+                        <input type="number" class="form-control" id="duration" value="15" max="15" disabled>
+                    </div>
+                </div>
+
+                <div class="col-3">
+                    <div class="pe-2">
+                        <label for="days_left" class="form-label">Days left</label>
+                        <input type="number" class="form-control" id="days_left" value="15" max="15" disabled>
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <div class="pe-2">
+                        <label for="returned" class="form-label">Returned</label>
+                        <input type="checkbox" class="form-check-input mt-0" id="returned" value="false">
+                    </div>
+                </div>
+
+                <div class="col-9 mb-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+
+            </form>
+            {#   end of borrow book form         #}
+
+
+            {#  form for update user form  #}
+            <form class="row g-3 col-md-10 mb-3 border border-primary rounded">
+                {#  name of user part   #}
+                <div class="col-md-6">
+                    <label for="userName" class="form-label">User name</label>
+                    <input type="text" name="userName" class="form-control" id="userName" disabled>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="userLastName" class="form-label">User last name</label>
+                    <input type="text" name="userName" class="form-control" id="userLastName" disabled>
+                </div>
+                {#  end name of user part   #}
+
+                {#  phone number and membership duration part of form  #}
+                <div class="col-md-6">
+                    <label for="userPhoneNumber" class="form-label">Phone number</label>
+                    <input type="text" name="userPhoneNumber" class="form-control" id="userPhoneNumber" disabled>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="userEmail" class="form-label">Email</label>
+                    <input type="text" name="userEmail" class="form-control" id="userEmail" disabled>
+                </div>
+
+                {#   end phone number and email part of form   #}
+
+                {#  membership duration part of form  #}
+                <div class="col-md-4 mb-2">
+                    <div class="pe-2">
+                    <label for="membershipDuration" class="form-label">Membership duration</label>
+                    <select class="form-select form-select-sm select1-class" aria-label=".form-select-sm example"
+                            id="membershipDuration">
+                        <option selected>Open this select menu</option>
+                        <option value="1">one-month</option>
+                        <option value="2">three-months</option>
+                        <option value="3">half-year</option>
+                        <option value="4">one-year</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="pe-2">
+                    <label for="feeForUser" class="form-label">Fee</label>
+                    <select class="form-select form-select-sm select2-class" aria-label=".form-select-sm example"
+                            id="feeForUser">
+                        <option selected>Open this select menu</option>
+                        <option value="1">0.00</option>
+                        <option value="2">10.00</option>
+                        <option value="3">20.00</option>
+                        <option value="4">30.00</option>
+                        <option value="5">40.00</option>
+                        <option value="6">50.00</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="col-md-1 mb-2">
+                    <div class="pe-2">
+                    <label for="end_date" class="form-label">End date</label>
+                    <input type="text" name="end_date" class="form-control" id="end_date" disabled>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="pe-2">
+                        <label for="is_active" class="form-label">Is active</label><br>
+                        <input type="checkbox" class="form-check-input mt-0" id="is_active" value="">
+                    </div>
+                </div>
+                {#  end of membership duration part of form  #}
+
+
+            </form>
+            {#  end of form for update user form  #}
+
+
+        </div>
+    </div>
+    {#    end of users and borrowers   #}
+
+
+    <div class="home-conteiner">
+        <p>authors</p>
+    </div>
+    <div class="home-conteiner">
+        <p>books</p>
+    </div>
+    <div class="home-conteiner">
+        <p>users</p>
+    </div>
+
+
+</div>
+{#end of main container#}
+
+
+{#<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"#}
+{#        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"#}
+{#        crossorigin="anonymous"></script>#}
+{#<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"#}
+{#        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"#}
+{#        crossorigin="anonymous"></script>#}
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script src="{% static 'js/base.js' %}" type="module"></script>
+<script src="{% static 'js/users_list/users_base_list.js' %}" type="module"></script>
+<script src="{% static 'js/users_list/books_home_page.js' %}"></script>
+<script src="{% static 'js/login/login_jwt.js' %}" type="module"></script>
+<script src="{% static 'js/users_list/users_base_list.js' %}" type="module"></script>
+<script src="{% static 'js/borrower_form/set_data_to_borrower_form.js' %}" type="module"></script>
+<script src="{% static 'js/autocomplete-bootstrap-autofill/autofill.js' %}"></script>
+{#<script src="{% static 'js/modal/modal.js' %}" type="module"></script>#}
+<script type="module">
+    {#    set borrower data to local storage   #}
+    var borrowerData = {
+        "id": '',
+        "last_name": '',
+        "first_name": '',
+    }
+    localStorage.setItem('user', JSON.stringify(borrowerData))
+
+
+    import enableSetBorrowerButton from "../../static/js/set_borrower_to_local_storage/enable_button_for_set_user.js";
+    import separate from "../../static/js/set_borrower_to_local_storage/seperate_name_in_list.js";
+
+    {# end borrower data local storage #}
+    let nameFieldBorrowForm = document.getElementById('borrowerName');
+    let userBorrowerId = document.getElementById('userBorrowerId');
+    let mySelectChange = document.getElementById('mySelect2');
+    let setBorrowerId2 = document.getElementById('setBorrower');
+
+
+    import setNameInBorrowBookForm from "../../static/js/set_borrower_to_local_storage/setNameInBorrowerBookForm.js";
+
+    var dataToSetInNewForm = JSON.parse(localStorage.getItem('user'))
+
+
+    $('#mySelect2').on('select2:select', function (e) {
+        var data = e.params.data;
+        setNameInBorrowBookForm(nameFieldBorrowForm, userBorrowerId, data.text, data.id);
+        enableSetBorrowerButton(setBorrowerId2);
+        separate('user', data.text, data.id)
+
+    });
+
+    {#function to set url#}
+
+    function setUrlFunction(search) {
+        return `http://127.0.0.1:8000/users-filtered/${search}`;
+    }
+
+    $(document).ready(function () {
+        var url;
+        $('#mySelect2').select2({
+            placeholder: 'Search user name...',
+            closeOnSelect: true,
+            minimumInputLength: 2,
+            theme: "bootstrap-5",
+            selectionCssClass: "select2--small", // For Select2 v4.1
+            dropdownCssClass: "select2--small",
+            width: '100%',
+            ajax: {
+                url: function (params) {
+                    return `http://127.0.0.1:8000/api/filters/users-filtered/${params.term}`;
+                },
+                dataType: 'json',
+
+                processResults: function (data) {
+                    console.log(data)
+                    // Transforms the top-level key of the response object from 'items' to 'results'
+                    return {
+                        results: $.map(data, function (item) {
+                            console.log(item.id)
+
+                            return {
+                                text: item.last_name + ' ' + item.first_name,
+                                id: item.id,
+                            }
+                        })
+                    };
+                },
+                data: function (params) {
+                    var query = {
+                        search: params.term,
+                    }
+
+                    // Query parameters will be ?search=[term]&type=public
+                    url = query['search']
+                    return {json: JSON.stringify(query)};
+                },
+            }
+        })
+    });
+
+    let letterUserFileld = document.getElementById('chooseUser');
+    let selectField = document.getElementById('disable-letter-field');
+    selectField.addEventListener('click', () => {
+        console.log('clickclick')
+        letterUserFileld.disabled = true
+    })
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

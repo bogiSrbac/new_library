@@ -1,0 +1,26 @@
+create Dockerfile
+
+after creating command
+docker build .
+
+create docker-compose.yml file
+
+nakon sto dodamo konfiguraciju za flake8 {debuging tool} i kreiramo poseban file u app subdirektoriju
+i instaliramo pomocu sledece komande
+docker-compose build
+
+-provjera python fajlova ide pomocu komande
+docker-compose run --rm app sh -c "flake8"
+
+-kreiranje django projekta u predvidjenom folderu
+
+docker-compose run --rm app sh -c "django-admin startproject app ."
+
+-pokretanje servera 
+docker-compose up
+
+docker-compose run --rm app sh -c "python manage.py test"
+
+-zaustavljanje kontejnera
+docker-compose down 
+
