@@ -666,12 +666,35 @@ def countMax(upRight):
             print(c, end=" ")
         print()
 Y = ['234 458', '124 214', '111 259', '457 368', '368 147']
-countMax(Y)
+
+ops = ["5", "-2", "4", "C", "D", "9", "+", "+"]
+
+def calPoints(ops):
+    result = []
+    counter = 0
+    for i in ops:
+        if i == "+":
+            num = int(result[counter-1]) + int(result[counter - 2])
+            result.append(str(num))
+            counter += 1
+        elif i == "C":
+            result.pop(counter - 1)
+            counter -= 1
+        elif i == "D":
+            num = int(result[counter - 1]) * 2
+            result.append(str(num))
+            counter += 1
+        else:
+            result.append(i)
+            counter += 1
+
+    return result
 
 
 
 
 
+print(calPoints(ops))
 
 
 

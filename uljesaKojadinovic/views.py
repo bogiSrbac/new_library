@@ -139,7 +139,7 @@ class BorrowerBookListAPIView(generics.ListAPIView):
 class BorrowerBookListCreateAPIView(generics.ListCreateAPIView):
     queryset = BorrowBook.objects.all()
     serializer_class = BorrowBookSerilaizer
-    permission_classes = [permissions.IsAdminUser]
+    permission_classes = [permissions.AllowAny]
 
     def perform_create(self, serializer):
         serializer.save()

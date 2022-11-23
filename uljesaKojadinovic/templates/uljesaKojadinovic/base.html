@@ -199,7 +199,7 @@
                 <div class="col-6">
                     <div class="pe-2">
                         <label for="returnDate" class="form-label">Return date</label>
-                        <input type="date" class="form-control" id="returnDate" value="" disabled>
+                        <input type="date" class="form-control" id="returnDate" value="" disabled pattern="\d{1,2}/\d{1,2}/\d{4}">
                     </div>
                 </div>
 
@@ -357,6 +357,7 @@
         "id": '',
         "last_name": '',
         "first_name": '',
+        "email": '',
     }
     localStorage.setItem('user', JSON.stringify(borrowerData))
 
@@ -378,9 +379,10 @@
 
     $('#mySelect2').on('select2:select', function (e) {
         var data = e.params.data;
+        console.log(data, 'email')
         setNameInBorrowBookForm(nameFieldBorrowForm, userBorrowerId, data.text, data.id);
         enableSetBorrowerButton(setBorrowerId2);
-        separate('user', data.text, data.id)
+        separate('user', data.text, data.id, data.email)
 
     });
 
@@ -416,6 +418,7 @@
                             return {
                                 text: item.last_name + ' ' + item.first_name,
                                 id: item.id,
+                                email: item.email,
                             }
                         })
                     };

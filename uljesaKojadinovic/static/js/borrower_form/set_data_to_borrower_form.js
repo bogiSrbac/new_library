@@ -64,6 +64,8 @@ $(document).ready(function () {
 
 import setBooksSelect from "./set_list_of_books.js";
 import setBookAndQuantity from "./set_book_in_stock.js";
+import set_chosen_book_to_storage from "./set_choosen_book_to_localstorage.js";
+import resetDateField from "./reset_date_field.js";
 
 let booksSelect = document.getElementById('chooseBook');
 let choosenBook = document.getElementById('choosenBook');
@@ -80,6 +82,9 @@ $('#findBook').on('select2:select', function (e) {
         bookQuantity.value = "";
         choosenBook.value = data.text;
         bookQuantity.value = data.in_stock;
+        set_chosen_book_to_storage(data);
+        resetDateField();
+
 
     } else if (data.key === "Authors") {
         booksSelect.innerHTML = `<option selected>Books...</option>`;
@@ -96,11 +101,13 @@ $('#findBook').on('select2:select', function (e) {
         })
         $(document).on('change', 'select', function () {
             let bookData = JSON.parse(localStorage.getItem(booksSelect.value))
-            console.log(bookData)
-            if (bookData.hasOwnProperty('book_name')) {
+            if (bookData !== null) {
                 let book = bookData.book_name;
                 let stock = bookData.in_stock;
+                console.log(bookData, 'book data')
                 setBookAndQuantity(choosenBook, bookQuantity, book, stock)
+                set_chosen_book_to_storage(bookData)
+                resetDateField;
             }
         });
 
@@ -112,5 +119,9 @@ $('#findBook').on('select2:select', function (e) {
 
     }
 
-
 });
+
+import setDateToStorage from "./set_date_to_storage.js";
+setDateToStorage();
+
+localStorage.setItem('bookForBorrow', JSON.stringify({}))

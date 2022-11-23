@@ -44,7 +44,6 @@ let letterOptions = document.querySelectorAll('.letter-options');
 let usersLetterList = async (letter, selesctForm, listOfChar) => {
 
     let data = await getUsersData(letter);
-              console.log('new try', 'letterValue')
 
     let listOfUsers = [];
     let listOfID = [];

@@ -35,7 +35,7 @@ class CreateLibraryUserSerializer(serializers.ModelSerializer):
 class LibraryUserSerializerLastName(serializers.ModelSerializer):
     class Meta:
         model = LibraryUser
-        fields = ['id', 'last_name', 'first_name',]
+        fields = ['id', 'last_name', 'first_name', 'email']
 
 
 
