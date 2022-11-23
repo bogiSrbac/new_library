@@ -12,8 +12,7 @@ workflows
 checks.yml
 
 github token for authentication
-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
-git remote set-url origin https://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@github.com/bogiSrbac/my-recipe-app-api.git
+
 
 git add .
 git commit -am 'what-commit-name'
