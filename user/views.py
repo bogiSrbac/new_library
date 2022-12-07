@@ -16,13 +16,13 @@ class CreateUserView(generics.CreateAPIView):
 class ManageUserView(generics.RetrieveUpdateDestroyAPIView):
     """Manage the authenticated user."""
     serializer_class = serializers.CreateLibraryUserSerializer
-    authentication_classes = [authentication.TokenAuthentication]
+    # authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     queryset = LibraryUser.objects.all()
 
-    def get_object(self):
-        """Retrieve, update and delete API user"""
-        return self.request.user
+    # def get_object(self):
+    #     """Retrieve, update and delete API user"""
+    #     return self.request.user
 
 class ListUserAPIView(generics.ListAPIView):
     queryset = LibraryUser.objects.all()

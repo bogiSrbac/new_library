@@ -83,6 +83,18 @@ import separate from "../set_borrower_to_local_storage/seperate_name_in_list.js"
 
 import setNameInBorrowBookForm from "../set_borrower_to_local_storage/setNameInBorrowerBookForm.js";
 
+//import fetch function to get and set user data in local storage
+
+import getUsersDataByLetterLocalStorage from "../set_borrower_to_local_storage/fetch_set_user_in_local_storage_letter.js";
+import set_user_data_to_local_storage from "../set_borrower_to_local_storage/func_to_set_user_data_to_local_storage.js";
+
+let setUserDataToLocalStorageByLetter = async (id) => {
+    let token = localStorage.getItem('accessToken')
+    token = token.toString()
+    let userData = await getUsersDataByLetterLocalStorage(id, token);
+    set_user_data_to_local_storage(userData)
+}
+
 let nameFieldBorrowForm1 = document.getElementById('borrowerName');
 let userBorrowerId1 = document.getElementById('userBorrowerId');
 
@@ -94,7 +106,7 @@ function setBorrower(inputField, id, array) {
         separate(array, this.options[this.selectedIndex].text, this.value)
         enableSetBorrowerButton(setBorrowerId);
         let newUser = localStorage.getItem('user')
-        console.log(JSON.parse(newUser))
+        setUserDataToLocalStorageByLetter(parseInt(this.value))
     })
 }
 

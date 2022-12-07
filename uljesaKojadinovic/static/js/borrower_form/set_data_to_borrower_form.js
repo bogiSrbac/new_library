@@ -92,6 +92,7 @@ $('#findBook').on('select2:select', function (e) {
         $.map(data.allData.books, function (items) {
             let book = {}
             book["book_name"] = items.book_name;
+            book["book"] = items.id
             book["ganres"] = items.ganres;
             book["id"] = items.id;
             book["in_stock"] = items.in_stock;
@@ -124,4 +125,3 @@ $('#findBook').on('select2:select', function (e) {
 import setDateToStorage from "./set_date_to_storage.js";
 setDateToStorage();
 
-localStorage.setItem('bookForBorrow', JSON.stringify({}))

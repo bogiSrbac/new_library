@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     "corsheaders",
     'drf_spectacular',
     'user',
+    'custom_filters.apps.CustomFiltersConfig',
+    'borrowBook.apps.BorrowbookConfig',
 ]
 
 MIDDLEWARE = [

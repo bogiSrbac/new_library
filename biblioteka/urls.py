@@ -23,6 +23,7 @@ urlpatterns = [
     path('api/', include('uljesaKojadinovic.urls')),
     path('api/user/', include('user.urls')),
     path('api/filters/', include('custom_filters.urls')),
+    path('api/borrow/', include('borrowBook.urls')),
     path('api/schema/', SpectacularAPIView.as_view(api_version='v1'), name='api-schema'),
     # Optional UI:
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='api-schema'), name='api-docs'),

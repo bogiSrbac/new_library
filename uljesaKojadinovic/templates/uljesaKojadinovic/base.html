@@ -199,7 +199,8 @@
                 <div class="col-6">
                     <div class="pe-2">
                         <label for="returnDate" class="form-label">Return date</label>
-                        <input type="date" class="form-control" id="returnDate" value="" disabled pattern="\d{1,2}/\d{1,2}/\d{4}">
+                        <input type="date" class="form-control" id="returnDate" value="" disabled
+                               pattern="\d{1,2}/\d{1,2}/\d{4}">
                     </div>
                 </div>
 
@@ -225,7 +226,7 @@
                 </div>
 
                 <div class="col-9 mb-2">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                    <button type="button" class="btn btn-primary" id="setBorrowBook">Borrow book</button>
                 </div>
 
             </form>
@@ -262,38 +263,38 @@
                 {#  membership duration part of form  #}
                 <div class="col-md-4 mb-2">
                     <div class="pe-2">
-                    <label for="membershipDuration" class="form-label">Membership duration</label>
-                    <select class="form-select form-select-sm select1-class" aria-label=".form-select-sm example"
-                            id="membershipDuration">
-                        <option selected>Open this select menu</option>
-                        <option value="1">one-month</option>
-                        <option value="2">three-months</option>
-                        <option value="3">half-year</option>
-                        <option value="4">one-year</option>
-                    </select>
+                        <label for="membershipDuration" class="form-label">Membership duration</label>
+                        <select class="form-select form-select-sm select1-class" aria-label=".form-select-sm example"
+                                id="membershipDuration">
+                            <option selected>Open this select menu</option>
+                            <option value="1">one-month</option>
+                            <option value="2">three-months</option>
+                            <option value="3">half-year</option>
+                            <option value="4">one-year</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="col-md-4 mb-2">
+                <div class="col-md-3 mb-2">
                     <div class="pe-2">
-                    <label for="feeForUser" class="form-label">Fee</label>
-                    <select class="form-select form-select-sm select2-class" aria-label=".form-select-sm example"
-                            id="feeForUser">
-                        <option selected>Open this select menu</option>
-                        <option value="1">0.00</option>
-                        <option value="2">10.00</option>
-                        <option value="3">20.00</option>
-                        <option value="4">30.00</option>
-                        <option value="5">40.00</option>
-                        <option value="6">50.00</option>
-                    </select>
+                        <label for="feeForUser" class="form-label">Fee</label>
+                        <select class="form-select form-select-sm select2-class" aria-label=".form-select-sm example"
+                                id="feeForUser">
+                            <option selected>Open this select menu</option>
+                            <option value="1">0.00</option>
+                            <option value="2">10.00</option>
+                            <option value="3">20.00</option>
+                            <option value="4">30.00</option>
+                            <option value="5">40.00</option>
+                            <option value="6">50.00</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="col-md-1 mb-2">
+                <div class="col-md-3 mb-2">
                     <div class="pe-2">
-                    <label for="end_date" class="form-label">End date</label>
-                    <input type="text" name="end_date" class="form-control" id="end_date" disabled>
+                        <label for="end_date" class="form-label">End date</label>
+                        <input type="text" name="end_date" class="form-control" id="end_date" disabled>
                     </div>
                 </div>
 
@@ -373,16 +374,20 @@
 
 
     import setNameInBorrowBookForm from "../../static/js/set_borrower_to_local_storage/setNameInBorrowerBookForm.js";
+    import set_user_data_to_local_storage
+        from "../../static/js/set_borrower_to_local_storage/func_to_set_user_data_to_local_storage.js";
 
     var dataToSetInNewForm = JSON.parse(localStorage.getItem('user'))
 
 
     $('#mySelect2').on('select2:select', function (e) {
         var data = e.params.data;
-        console.log(data, 'email')
+        console.log(data.user_data['email'], 'new data')
         setNameInBorrowBookForm(nameFieldBorrowForm, userBorrowerId, data.text, data.id);
         enableSetBorrowerButton(setBorrowerId2);
-        separate('user', data.text, data.id, data.email)
+        {#separate('user', data.text, data.id, data.email)#}
+        set_user_data_to_local_storage(data.user_data)
+
 
     });
 
@@ -419,6 +424,7 @@
                                 text: item.last_name + ' ' + item.first_name,
                                 id: item.id,
                                 email: item.email,
+                                user_data: item,
                             }
                         })
                     };
@@ -442,6 +448,26 @@
         console.log('clickclick')
         letterUserFileld.disabled = true
     })
+    localStorage.setItem('bookForBorrow', JSON.stringify({}))
+
+    //even to set new book borrow to db
+    let borrowBookButton = document.getElementById('setBorrowBook');
+    import set_new_borrow_book_data_to_db from "../../static/js/borrow_book/set_new_borrow_book_data.js";
+
+    let borrow_book_function = async () => {
+        let token = localStorage.getItem('accessToken')
+        token = token.toString()
+        let payload = JSON.parse(localStorage.getItem('bookForBorrow'))
+        let email = JSON.parse(localStorage.getItem('user'))
+        payload['borrower'] = email['id']
+        JSON.stringify(payload)
+        await set_new_borrow_book_data_to_db(payload, token)
+    }
+
+    borrowBookButton.addEventListener('click', () => {
+        borrow_book_function()
+    })
+
 
 </script>
 </body>

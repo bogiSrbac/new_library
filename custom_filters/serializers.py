@@ -16,7 +16,7 @@ class LibraryUserSerializer(serializers.ModelSerializer):
         model = LibraryUser
         fields = ['id', 'first_name', 'last_name', 'phone_number',
                   'membership_duration', 'fee',
-                  'email', 'password', ]
+                  'email', 'password', 'start_date', 'end_date', 'fee', 'duration', 'is_active']
 
 
 class AuthorBookSerializerFilter(serializers.ModelSerializer):
