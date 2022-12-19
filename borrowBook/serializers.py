@@ -11,22 +11,40 @@ class AuthorBookSerializer(serializers.ModelSerializer):
     class Meta:
         model = AuthorBook
         fields = ['id', "first_name", "last_name", "year_of_birth", 'books']
+        read_only_fields = ['id']
 
     def get_books(self, obj):
-        products = Book.objects.filter(author=obj)
+        products = Book.objects.filter(author=obj).order_by("-id")
         response = BooksSerializer(products, many=True).data
         print(response)
 
         return response
 
+
 class BooksSerializer(serializers.ModelSerializer):
     """Serializer to set books to authors"""
-    # author2 = AuthorBookSerializer(many=True, read_only=False)
+    author2 = AuthorBookSerializer(many=True, read_only=False, required=False)
 
     class Meta:
         model = Book
-        fields = ['id', 'book_name', 'release_year', 'pages', 'ganres', 'author', 'quantity', 'in_stock',]
+        fields = ['id', 'book_name', 'release_year', 'pages', 'ganres', 'author2', 'quantity', 'in_stock',]
         read_only_fields = ['id']
+
+    def _get_or_create_author(self, authors, book):
+        """handle getting or creating author"""
+        for author in authors:
+            author_obj, created = AuthorBook.objects.get_or_create(
+                **author
+            )
+            book.authors.add(author_obj)
+
+    def create(self, validated_data):
+        """reate a book"""
+        print(validated_data)
+        authors = validated_data.pop("authors", [])
+        book = Book.objects.create(**validated_data)
+        self._get_or_create_author(authors, book)
+        return book
 
 
 

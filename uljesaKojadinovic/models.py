@@ -85,7 +85,6 @@ class AuthorBook(models.Model):
     first_name = models.CharField(_('first name'), max_length=150, blank=True, null=True)
     last_name = models.CharField(_('last name'), max_length=150, blank=True, null=True)
     year_of_birth = models.DateField(_('year of birth'), blank=True, null=True)
-    book = models.ManyToManyField('Book', blank=True)
 
     class Meta:
         ordering = ['last_name', 'first_name']

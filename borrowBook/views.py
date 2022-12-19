@@ -12,9 +12,14 @@ from . import serializers
 class AuthorBookDetailUpdateDestroyAPIView(viewsets.ModelViewSet):
     queryset = AuthorBook.objects.all()
     serializer_class = serializers.AuthorBookSerializer
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAdminUser]
     http_method_names = ['post', 'put', 'patch', 'delete', 'get']
 
+class BookDetailUpdateDestroyAPIViwe(viewsets.ModelViewSet):
+    queryset = Book.objects.all()
+    serializer_class = serializers.BooksSerializer
+    permission_classes = [permissions.IsAdminUser]
+    http_method_names = ['post', 'put', 'patch', 'delete', 'get']
 
 class BookListAPIView(generics.ListAPIView):
     queryset = Book.objects.all()
@@ -30,10 +35,7 @@ class BookCreateAPIView(generics.ListCreateAPIView):
     def perform_create(self, serializer):
         serializer.save()
 
-class BookDetailUpdateDestoyAPIViwe(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Book.objects.all()
-    serializer_class = serializers.BooksSerializer
-    permission_classes = [permissions.IsAdminUser]
+
 
 class BorrowBookViewSet(viewsets.ModelViewSet):
     queryset = BorrowBook.objects.all()
