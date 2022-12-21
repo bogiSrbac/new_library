@@ -125,8 +125,6 @@ class CreateAuthorApiTest(TestCase):
         author = AuthorBook.objects.all()
         serializer = AuthorBookSerializer(author, many=True)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        print(res.data)
-        print(serializer.data)
         self.assertEqual(res.data, serializer.data)
 
 

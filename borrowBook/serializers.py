@@ -28,7 +28,6 @@ class BooksSerializer(serializers.ModelSerializer):
     class Meta:
         model = Book
         fields = ['id', 'book_name', 'release_year', 'pages', 'ganres', 'author2', 'quantity', 'in_stock',]
-        read_only_fields = ['id']
 
     def _get_or_create_author(self, authors, book):
         """handle getting or creating author"""
@@ -36,15 +35,29 @@ class BooksSerializer(serializers.ModelSerializer):
             author_obj, created = AuthorBook.objects.get_or_create(
                 **author
             )
-            book.authors.add(author_obj)
+
+            book.author.add(author_obj)
 
     def create(self, validated_data):
-        """reate a book"""
-        print(validated_data)
-        authors = validated_data.pop("authors", [])
+        """Create a book"""
+        authors = self.initial_data.pop("author", [])
         book = Book.objects.create(**validated_data)
         self._get_or_create_author(authors, book)
         return book
+
+    def update(self, instance, validated_data):
+        """Update book"""
+
+        authors = self.initial_data.pop("author", [])
+        if authors is not None:
+            instance.author.clear()
+            self._get_or_create_author(authors, instance)
+
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+
+        instance.save()
+        return instance
 
 
 

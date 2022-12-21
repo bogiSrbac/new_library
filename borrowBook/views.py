@@ -15,11 +15,15 @@ class AuthorBookDetailUpdateDestroyAPIView(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAdminUser]
     http_method_names = ['post', 'put', 'patch', 'delete', 'get']
 
-class BookDetailUpdateDestroyAPIViwe(viewsets.ModelViewSet):
+
+class BookDetailUpdateDestroyAPIView(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = serializers.BooksSerializer
     permission_classes = [permissions.IsAdminUser]
     http_method_names = ['post', 'put', 'patch', 'delete', 'get']
+
+
+
 
 class BookListAPIView(generics.ListAPIView):
     queryset = Book.objects.all()

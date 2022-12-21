@@ -11,7 +11,7 @@ from . import views
 router = DefaultRouter(trailing_slash=False)
 router.register('borrow-book-new', views.BorrowBookViewSet)
 router.register('author', views.AuthorBookDetailUpdateDestroyAPIView)
-router.register('book', views.BookDetailUpdateDestroyAPIViwe)
+router.register('book', views.BookDetailUpdateDestroyAPIView)
 
 app_name = 'borrowBook'
 
