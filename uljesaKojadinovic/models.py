@@ -141,15 +141,13 @@ class BorrowBook(models.Model):
         return str(self.book.book_name) + ' ' + str(self.borrower.last_name) + ' ' + str(self.borrower.first_name)
 
     def save(self, *args, **kwargs):
-        if self.returned == False and self.book.in_stock > 0:
+        if self.returned is False and self.book.in_stock > 0:
             self.return_date = self.lend_date + datetime.timedelta(days=15)
             self.duration = 15
             days = self.return_date - datetime.date.today()
             self.days_left = days.days
             self.book.in_stock = self.book.in_stock - 1
-
-
-
+            self.book.save()
         else:
             self.days_left = 0
             self.duration = 0

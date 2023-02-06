@@ -203,20 +203,7 @@ class CreateAuthorApiTest(TestCase):
         self.assertFalse(auth)
 
 
-    def test_create_new_book(self):
-        """Test to create new book in db"""
-        author1 = AuthorBook.objects.create(first_name="Dragan", last_name="Draganovic", year_of_birth="1966-07-14")
-        author2 = AuthorBook.objects.create(first_name="Mirko", last_name="Mirkovic", year_of_birth="1945-08-22")
 
-        payload = {
-            "book_name": 'New book',
-            "release_year": datetime.datetime(1985, 10, 20),
-            "pages": 300,
-            "ganres": "Health & Fitness",
-            "quantity": 100,
-            "in_stock": 100,
-            "author": [{"id": author1.id, }]
-        }
 
 
 

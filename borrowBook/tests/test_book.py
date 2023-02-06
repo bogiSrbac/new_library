@@ -158,12 +158,7 @@ class CreateBookApiTests(TestCase):
 
     def test_create_book_without_author(self):
         """test create book without author instance"""
-        # author1 = create_author()
-        # author2_update = author_payload("Momir", "Momirovic")
-        # author_2 = create_author(**author2_update)
-        # author3_update = author_payload("Darko", "Darkic")
-        # author_3 = create_author(**author3_update)
-        # book_data = book_payload(author=[{"id": author1.id}, {"id": author_2.id}])
+
         book_data = book_payload()
         res = self.client.post(BOOK_URL, book_data, format="json")
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
@@ -192,7 +187,7 @@ class CreateBookApiTests(TestCase):
         book_original = create_book()
 
         payload = {
-            "book_name": "New book u[dated",
+            "book_name": "New book updated",
             "release_year": datetime.date.today() + datetime.timedelta(days=1),
             "pages": 200,
             "ganres": "Business & Career",
@@ -293,6 +288,64 @@ class CreateBookApiTests(TestCase):
                 last_name=authors["last_name"]
             ).exists()
             self.assertTrue(exists)
+
+    def test_create_on_update(self):
+        """Test creating author while updating book"""
+        book = create_book()
+        author_1 = {
+            "first_name": "Janko",
+            "last_name": "Jankovic",
+            "year_of_birth": "1957-04-25"
+        }
+        author = {"author": [author_1]}
+        url = book_detail_url(book.id)
+        res = self.client.patch(url, author, format="json")
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        new_author = AuthorBook.objects.get(first_name=author_1["first_name"], last_name=author_1["last_name"])
+        self.assertIn(new_author, book.author.all()) 
+        
+    def test_update_assign_author(self):
+        """Test assigning an existing author when updating book"""
+        author_update = author_payload("Janko", "Jankovic", "1944-02-15")
+        author = create_author(**author_update)
+
+        book = create_book()
+        book.author.add(author)
+
+        new_author_data = author_payload("Milka", "Milkovic", "1956-08-22")
+        new_author = create_author(**new_author_data)
+        payload = {"author": [{"id": new_author.id}]}
+
+        url = book_detail_url(book.id)
+        res = self.client.patch(url, payload, format="json")
+
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertIn(new_author, book.author.all())
+        self.assertNotIn(author, book.author.all())
+
+    def test_clear_author_from_book(self):
+        """Test delete all authors from book"""
+        author = create_author()
+        payload = {
+            "book_name": "New book",
+            "release_year": datetime.date.today(),
+            "pages": 100,
+            "ganres": "Health & Fitness",
+            "quantity": 100,
+            "in_stock": 100,
+        }
+        book = create_book(**payload)
+        book.author.add(author)
+
+        new_payload = {"author": []}
+        url = book_detail_url(book.id)
+        res = self.client.patch(url, new_payload, format="json")
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertEqual(book.author.count(), 0)
+
+
+
 
 
 

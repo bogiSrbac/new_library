@@ -13,6 +13,13 @@ class AuthorBookSerializer(serializers.ModelSerializer):
         fields = ['id', "first_name", "last_name", "year_of_birth", 'books']
         read_only_fields = ['id']
 
+    def validate(self, attrs):
+        """Validate data for creating new author instance"""
+        print(self.context.get('request').method, 'method')
+        if self.context.get('request').method != "PATCH" and AuthorBook.objects.filter(first_name=attrs["first_name"], last_name=attrs["last_name"], year_of_birth=attrs["year_of_birth"]).exists():
+            raise serializers.ValidationError({"error":"This author already exists in db!"})
+        return attrs
+
     def get_books(self, obj):
         products = Book.objects.filter(author=obj).order_by("-id")
         response = BooksSerializer(products, many=True).data
@@ -37,6 +44,7 @@ class BooksSerializer(serializers.ModelSerializer):
             )
 
             book.author.add(author_obj)
+
 
     def create(self, validated_data):
         """Create a book"""
@@ -63,8 +71,8 @@ class BooksSerializer(serializers.ModelSerializer):
 
 
 class BorrowBookSerilaizer(serializers.ModelSerializer):
-    # lend_date = serializers.ReadOnlyField()
-    # return_date = serializers.ReadOnlyField()
+    lend_date = serializers.ReadOnlyField()
+    return_date = serializers.ReadOnlyField()
     duration = serializers.ReadOnlyField()
     days_left = serializers.ReadOnlyField()
 

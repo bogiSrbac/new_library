@@ -1,6 +1,7 @@
 import datetime
 import calendar
 import pywhatkit
+
 def add_days_to_month():
     start_day = datetime.date.today()
     current_month_duration = calendar.monthrange(start_day.year, start_day.month)
@@ -40,6 +41,7 @@ def add_days_for_three_months(durationOfMembership):
     control_counter = start_month
     setMembershipData(durationOfMembership, listOfMonths, daysOfThreeMonths, start_month, start_year, counterForMonth, control_counter)
     return sum(daysOfThreeMonths)
+
 days = datetime.date.today() - datetime.date(2022, 8, 2)
 print(type(days.days))
 
